@@ -39,6 +39,7 @@ class _bhagvadState extends State<bhagvad> {
         itemCount: finalResult.length,
           itemBuilder: (context, i){
         return Container(
+          //
           alignment: Alignment.center,
           child: Text("${finalResult[i]['description']}"),
         );
