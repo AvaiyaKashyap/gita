@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 void main()
@@ -19,6 +21,11 @@ class _bhagvadState extends State<bhagvad> {
   String jsonData ='' ;
   loadJson() async{
     jsonData = await rootBundle.loadString("assets/jsonfile/bhagvadgita.json");
+    List decodedData = jsonDecode(jsonData);
+    setState(() {
+      finalResult = decodedData;
+    });
+
   }
   @override
   void initState() {
@@ -27,6 +34,15 @@ class _bhagvadState extends State<bhagvad> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body:ListView.builder(
+        itemCount: finalResult.length,
+          itemBuilder: (context, i){
+        return Container(
+          alignment: Alignment.center,
+          child: Text("${finalResult[i]['description']}"),
+        );
+      })
+    );
   }
 }
